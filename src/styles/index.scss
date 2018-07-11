@@ -1,0 +1,29 @@
+body {
+  box-sizing: border-box;
+  background-color: rgb(38, 114, 190);
+}
+
+#card_stack {
+  width: 50vw;
+  height: 60vh;
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  background-color: green;
+}
+
+.card_stack__card {
+  background: white;
+  padding: 5px;
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
+}
+
+.card_stack__card_open {
+  background: red;
+}
+.card_stack__card_disabled {
+  pointer-events: none;
+}
