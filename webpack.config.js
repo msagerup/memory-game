@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const ExtractSASS = new ExtractTextPlugin('styles/bundle.[hash].css');
-const port = 3004;
+const port = 3001;
 
 module.exports = options => {
   const dest = Path.join(__dirname, 'dist');

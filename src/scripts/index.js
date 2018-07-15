@@ -22,6 +22,8 @@ const icons = [
   'fas fa-helicopter'
 ];
 
+let openCards = [];
+
 // Create cards inside UL with append child
 for (let i = 0; i < icons.length; i++) {
   // Create the li for each card
@@ -35,6 +37,35 @@ for (let i = 0; i < icons.length; i++) {
 }
 // Put cards into an array
 const cards = [...cardInStack];
+
+for (let i = 0; i < cards.length; i++) {
+  cards[i].addEventListener('click', displayCard);
+}
+// Toggle classes on press
+function displayCard() {
+  if (openCards.length === 1) {
+    this.classList.toggle('card_stack__card_open');
+    openCards.push(this);
+    console.log(this);
+
+    // compare the 2 cards
+    //If cards are matched
+    if (this.innerHTML === openCards[0].innerHTML) {
+      // Sets array 0 and 1 with matched class
+      this.classList.add('card_stack__card_matched');
+      openCards[0].classList.add('card_stack__card_matched');
+      openCards = [];
+    } else {
+      this.classList.remove('card_stack__card_open');
+      openCards[0].classList.remove('card_stack__card_open');
+      openCards = [];
+    }
+  } else {
+    this.classList.toggle('card_stack__card_open');
+    openCards.push(this);
+    console.log(openCards);
+  }
+}
 
 // Shuffle cards function, Fisher-Yates
 function shuffle(array) {
@@ -56,8 +87,8 @@ function shuffle(array) {
 function startGame() {
   const shuffleCard = shuffle(cards);
   for (let i = 0; i < shuffleCard.length; i++) {
-    cards.forEach.call(shuffleCard, function(card) {
-      cardContainer.appendChild(card);
+    cards.forEach.call(shuffleCard, function(item) {
+      cardContainer.appendChild(item);
     });
   }
 }

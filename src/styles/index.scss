@@ -19,11 +19,18 @@ body {
   width: 100px;
   height: 100px;
   margin-top: 10px;
+  font-size: 0;
 }
 
 .card_stack__card_open {
   background: red;
+  font-size: 30px;
 }
 .card_stack__card_disabled {
   pointer-events: none;
+}
+
+.card_stack__card_matched {
+  pointer-events: none;
+  background-color: green;
 }
