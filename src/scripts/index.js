@@ -23,6 +23,7 @@ const icons = [
 ];
 
 let openCards = [];
+let matchedCards = [];
 
 // Create cards inside UL with append child
 for (let i = 0; i < icons.length; i++) {
@@ -30,6 +31,7 @@ for (let i = 0; i < icons.length; i++) {
   const card = document.createElement('li');
   // Add the class to the card with the icons
   card.classList.add('card_stack__card');
+  card.classList.add('card_stack__icon');
   // Append the class to the li
   card.innerHTML = `<i class="${icons[i]}"</i>`;
   // Append the li to the ul
@@ -41,29 +43,33 @@ const cards = [...cardInStack];
 for (let i = 0; i < cards.length; i++) {
   cards[i].addEventListener('click', displayCard);
 }
+
 // Toggle classes on press
 function displayCard() {
   if (openCards.length === 1) {
-    this.classList.toggle('card_stack__card_open');
+    this.classList.add('card_stack__card_open');
     openCards.push(this);
-    console.log(this);
-
-    // compare the 2 cards
-    //If cards are matched
-    if (this.innerHTML === openCards[0].innerHTML) {
-      // Sets array 0 and 1 with matched class
-      this.classList.add('card_stack__card_matched');
-      openCards[0].classList.add('card_stack__card_matched');
-      openCards = [];
-    } else {
-      this.classList.remove('card_stack__card_open');
-      openCards[0].classList.remove('card_stack__card_open');
-      openCards = [];
-    }
+    // Compare the two cards
+    compareCards(this, openCards[0]);
   } else {
-    this.classList.toggle('card_stack__card_open');
+    this.classList.add('card_stack__card_open');
     openCards.push(this);
-    console.log(openCards);
+  }
+}
+
+// Function for comparing the two cards
+function compareCards(firstPick, secondPick) {
+  if (firstPick.innerHTML === secondPick.innerHTML) {
+    // If cards are matched add this class to them
+    firstPick.classList.add('card_stack__card_matched');
+    secondPick.classList.add('card_stack__card_matched');
+    // Push matched cards to matched cards array
+    matchedCards.push(firstPick, secondPick);
+    openCards = [];
+  } else {
+    firstPick.classList.remove('card_stack__card_open');
+    secondPick.classList.remove('card_stack__card_open');
+    openCards = [];
   }
 }
 
@@ -94,16 +100,3 @@ function startGame() {
 }
 
 startGame();
-
-// // Put cards into an array so that we can loop over them, (HTML collection vs Array)
-// let cards = [...card];
-// // Loop over and add eventListener to each card
-// for (let i = 0; i < cards.length; i++) {
-//   cards[i].addEventListener('click', displayCard);
-// }
-// // When clicked add classes to card
-// function displayCard() {
-//   //this.classList.toggle('card_stack__card_open');
-//   //this.classList.toggle('show');
-//   //this.classList.toggle('card_stack__card_disabled');
-// }

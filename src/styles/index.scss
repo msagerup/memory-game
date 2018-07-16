@@ -1,36 +1,58 @@
+// Color settings
+$bg-color: rgb(38, 114, 190);
+$cardOpenColor: rgb(20, 119, 158);
+$cardMatchedColor: rgb(41, 170, 69);
+
+ul {
+  list-style: none;
+}
+
 body {
   box-sizing: border-box;
-  background-color: rgb(38, 114, 190);
+  background-color: $bg-color;
+}
+
+#card_cointainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 #card_stack {
-  width: 50vw;
-  height: 60vh;
-  list-style: none;
+  margin: 0 auto;
+  width: 450px;
+  min-height: 500px;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  background-color: green;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .card_stack__card {
   background: white;
-  padding: 5px;
+  margin: 2px;
   width: 100px;
   height: 100px;
   margin-top: 10px;
   font-size: 0;
 }
 
+.card_stack__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card_stack__card_open {
-  background: red;
+  background: $cardOpenColor;
   font-size: 30px;
 }
+
 .card_stack__card_disabled {
   pointer-events: none;
 }
 
 .card_stack__card_matched {
   pointer-events: none;
-  background-color: green;
+  background-color: yellow;
 }
