@@ -36,50 +36,53 @@ for (let i = 0; i < icons.length; i++) {
   card.innerHTML = `<i class="${icons[i]}"</i>`;
   // Append the li to the ul
   cardContainer.appendChild(card);
-}
-// Put cards into an array
-const cards = [...cardInStack];
 
-for (let i = 0; i < cards.length; i++) {
-  cards[i].addEventListener('click', displayCard);
-}
+  // Do this when cards are clicked
+  card.addEventListener('click', function() {
+    const currentCard = this;
+    const previousCard = openCards[0];
 
-// On Card Click
-function displayCard() {
-  console.log('theses are matched: ' + matchedCards);
-  if (openCards.length === 1) {
-    this.classList.add('card_stack__card_open', 'card_stack__card_show');
-    // Push clicked cards to array
-    openCards.push(this);
+    // If we have a opened card
+    if (openCards.length === 1) {
+      card.classList.add('card_stack__card_open', 'card_stack__card_show');
+      // Push open cards to openCards
+      openCards.push(currentCard);
 
-    // If there is 2 cards in the array compare the cards
-    if (this.innerHTML === openCards[0].innerHTML) {
-      // Add matched class to cards if they are the same
-      this.classList.add('card_stack__card_matched');
-      openCards[0].classList.add('card_stack__card_matched');
-      openCards = [];
-      // Add matched cards to matched cards array
-    } else {
-      setTimeout(function() {
-        this.classList.remove('card_stack__card_open', 'card_stack__card_show');
-        openCards[0].classList.remove(
-          'card_stack__card_open',
-          'card_stack__card_show'
-        );
+      // Compare cards if there is more than 1
+      if (currentCard.innerHTML === previousCard.innerHTML) {
+        currentCard.classList.add('card_stack__card_matched');
+        previousCard.classList.add('card_stack__card_matched');
 
+        // Reset openCards so there is never more than 2 in the the array
         openCards = [];
-      });
+      } else {
+        // To see the other card before it closes we need to add a delay on it.
+        setTimeout(() => {
+          currentCard.classList.remove(
+            'card_stack__card_open',
+            'card_stack__card_show'
+          );
+          previousCard.classList.remove(
+            'card_stack__card_open',
+            'card_stack__card_show'
+          );
+        }, 500);
+
+        // Reset openCards so there is never more than 2 in the the array
+        openCards = [];
+      }
+
+      // If there is no opened cards
+    } else {
+      card.classList.add('card_stack__card_open', 'card_stack__card_show');
+      // Push open cards to openCards
+      openCards.push(currentCard);
     }
-  } else {
-    this.classList.add('card_stack__card_open', 'card_stack__card_show');
-    // Push clicked cards to array
-    openCards.push(this);
-    console.log(openCards);
-  }
+  });
 }
 
 // Shuffle cards function, Fisher-Yates
-function shuffle(array) {
+const shuffle = array => {
   let currentIndex = array.length,
     temporaryValue,
     randomIndex;
@@ -92,16 +95,18 @@ function shuffle(array) {
     array[randomIndex] = temporaryValue;
   }
   return array;
-}
+};
 // Shuffle the cards
+// Put cards into an array
+const cards = [...cardInStack];
 
-function startGame() {
+const startGame = () => {
   const shuffleCard = shuffle(cards);
   for (let i = 0; i < shuffleCard.length; i++) {
     cards.forEach.call(shuffleCard, function(item) {
       cardContainer.appendChild(item);
     });
   }
-}
+};
 
 startGame();
