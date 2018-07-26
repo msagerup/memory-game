@@ -44,7 +44,11 @@ for (let i = 0; i < icons.length; i++) {
 
     // If we have a opened card
     if (openCards.length === 1) {
-      card.classList.add('card_stack__card_open', 'card_stack__card_show');
+      card.classList.add(
+        'card_stack__card_open',
+        'card_stack__card_show',
+        'card_disable'
+      );
       // Push open cards to openCards
       openCards.push(currentCard);
 
@@ -60,11 +64,13 @@ for (let i = 0; i < icons.length; i++) {
         setTimeout(() => {
           currentCard.classList.remove(
             'card_stack__card_open',
-            'card_stack__card_show'
+            'card_stack__card_show',
+            'card_disable'
           );
           previousCard.classList.remove(
             'card_stack__card_open',
-            'card_stack__card_show'
+            'card_stack__card_show',
+            'card_disable'
           );
         }, 500);
 
@@ -74,7 +80,11 @@ for (let i = 0; i < icons.length; i++) {
 
       // If there is no opened cards
     } else {
-      card.classList.add('card_stack__card_open', 'card_stack__card_show');
+      card.classList.add(
+        'card_stack__card_open',
+        'card_stack__card_show',
+        'card_disable'
+      );
       // Push open cards to openCards
       openCards.push(currentCard);
     }

@@ -5,6 +5,7 @@ $cardMatchedColor: rgb(41, 170, 69);
 
 ul {
   list-style: none;
+  padding: 0px;
 }
 
 body {
@@ -19,7 +20,14 @@ body {
   flex-direction: column;
 }
 
+.card_container__title {
+  font-size: 2rem;
+  color: White;
+  text-align: center;
+}
+
 #card_stack {
+  padding-top: 30px;
   margin: 0 auto;
   width: 450px;
   min-height: 500px;
@@ -35,6 +43,11 @@ body {
   height: 100px;
   margin-top: 10px;
   font-size: 0px;
+  border-radius: 20px;
+}
+
+.card_disable {
+  pointer-events: none;
 }
 
 .card_stack__icon {
@@ -57,5 +70,5 @@ body {
 
 .card_stack__card_matched {
   pointer-events: none;
-  background-color: yellow;
+  background-color: $cardMatchedColor;
 }
